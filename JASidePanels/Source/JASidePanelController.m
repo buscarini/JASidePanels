@@ -227,16 +227,28 @@ static char ja_kvoContext;
 
 #endif
 
-- (void)willAnimateRotationToInterfaceOrientation:(__unused UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    self.centerPanelContainer.frame = [self _adjustCenterFrame];	
-    [self _layoutSideContainers:YES duration:duration];
-    [self _layoutSidePanels];
-    [self styleContainer:self.centerPanelContainer animate:YES duration:duration];
-    if (self.centerPanelHidden) {
-        CGRect frame = self.centerPanelContainer.frame;
-        frame.origin.x = self.state == JASidePanelLeftVisible ? self.centerPanelContainer.frame.size.width : -self.centerPanelContainer.frame.size.width;
-        self.centerPanelContainer.frame = frame;
-    }
+//- (void)willAnimateRotationToInterfaceOrientation:(__unused UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+//    self.centerPanelContainer.frame = [self _adjustCenterFrame];	
+//    [self _layoutSideContainers:YES duration:duration];
+//    [self _layoutSidePanels];
+//    [self styleContainer:self.centerPanelContainer animate:YES duration:duration];
+//    if (self.centerPanelHidden) {
+//        CGRect frame = self.centerPanelContainer.frame;
+//        frame.origin.x = self.state == JASidePanelLeftVisible ? self.centerPanelContainer.frame.size.width : -self.centerPanelContainer.frame.size.width;
+//        self.centerPanelContainer.frame = frame;
+//    }
+//}
+
+- (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+	self.centerPanelContainer.frame = [self _adjustCenterFrame];
+	[self _layoutSideContainers:YES duration:coordinator.transitionDuration];
+	[self _layoutSidePanels];
+	[self styleContainer:self.centerPanelContainer animate:YES duration:coordinator.transitionDuration];
+	if (self.centerPanelHidden) {
+		CGRect frame = self.centerPanelContainer.frame;
+		frame.origin.x = self.state == JASidePanelLeftVisible ? self.centerPanelContainer.frame.size.width : -self.centerPanelContainer.frame.size.width;
+		self.centerPanelContainer.frame = frame;
+	}
 }
 
 #pragma mark - State
