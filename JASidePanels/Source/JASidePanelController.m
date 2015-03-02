@@ -850,9 +850,6 @@ static char ja_kvoContext;
             if (self.style == JASidePanelMultipleActive) {
                 frame.size.width = self.view.bounds.size.width - self.leftVisibleWidth;
             }
-			else {
-				frame.size.width = self.view.bounds.size.width - 10;
-			}
             break;
 		}
         case JASidePanelRightVisible: {
@@ -861,9 +858,6 @@ static char ja_kvoContext;
                 frame.origin.x = 0.0f;
                 frame.size.width = self.view.bounds.size.width - self.rightVisibleWidth;
             }
-			else {
-				frame.size.width = self.view.bounds.size.width - 10;
-			}
             break;
 		}
     }
